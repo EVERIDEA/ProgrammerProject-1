@@ -2,32 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerHealth : MonoBehaviour, IHealth
+namespace Everidea.Core
 {
-    public Health Health;
-
-
-    //Adding calculation health from status etc from core database
-    public void InitHealth ()
+    public class PlayerHealth : MonoBehaviour, IHealth
     {
-        Health.AdditionalHealth = Health.NormalHealth + 50;
-        Health.CurrentHealth = Health.AdditionalHealth;
-    }
+        public Health Health;
 
-    //get all data health from object
-    public Health GetHealth()
-    {
-        return Health;
-    }
 
-    //Set health affected by damage opponent
-    public void SetHealth(float damage)
-    {
-        Health.CurrentHealth -= damage;
-        Debug.Log(Health.CurrentHealth);
-        if (Health.CurrentHealth <= 0) {
-            Health.CurrentHealth = 0;
-            Debug.Log("Player Dead");
+        //Adding calculation health from status etc from core database
+        public void InitHealth()
+        {
+            Health.AdditionalHealth = Health.NormalHealth + 50;
+            Health.CurrentHealth = Health.AdditionalHealth;
+        }
+
+        //get all data health from object
+        public Health GetHealth()
+        {
+            return Health;
+        }
+
+        //Set health affected by damage opponent
+        public void SetHealth(float damage)
+        {
+            Health.CurrentHealth -= damage;
+            Debug.Log(Health.CurrentHealth);
+            if (Health.CurrentHealth <= 0)
+            {
+                Health.CurrentHealth = 0;
+                Debug.Log("Player Dead");
+            }
         }
     }
 }

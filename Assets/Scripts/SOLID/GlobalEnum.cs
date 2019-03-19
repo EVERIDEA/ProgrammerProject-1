@@ -4,9 +4,8 @@ using UnityEngine;
 
 namespace Everidea.Core
 {
-    public interface IHealth
+    public enum CharacterType
     {
-        void SetHealth(float damage);
-        Health GetHealth();
+        PLAYER, ENEMY
     }
 }

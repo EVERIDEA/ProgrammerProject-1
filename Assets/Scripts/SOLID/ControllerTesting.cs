@@ -2,22 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ControllerTesting : MonoBehaviour {
-
-    Player playerA;
-
-    private void Awake()
+namespace Everidea.Core
+{
+    public class ControllerTesting : MonoBehaviour
     {
-        playerA = GetComponentInChildren<Player>();
-    }
 
-    private void Update()
-    {
-        if (Input.GetMouseButtonUp(0))
+        Player playerA;
+
+        private void Awake()
         {
-            Debug.Log("click");
-            DamageManager damage = new DamageManager();
-            damage.CalculateDamage(playerA, 20);
+            playerA = GetComponentInChildren<Player>();
+        }
+
+        private void Update()
+        {
+            if (Input.GetMouseButtonUp(0))
+            {
+                Debug.Log("click");
+                DamageManager damage = new DamageManager();
+                damage.CalculateDamage(playerA, 20);
+            }
         }
     }
 }

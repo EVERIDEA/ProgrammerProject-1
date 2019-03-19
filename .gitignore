@@ -1,0 +1,10 @@
+Library/
+ProjectSettings/
+Temp/
+UnityPackageManager/manifest.json
+.vs/
+ProjectProgrammer-1.csproj
+ProjectProgrammer-1.Editor.csproj
+ProjectProgrammer-1.sln
+Assets/Resources/
+Assets/Resources.meta

@@ -4,9 +4,7 @@ using UnityEngine;
 
 namespace Everidea.Core
 {
-    public interface IHealth
+    public interface IAttack
     {
-        void SetHealth(float damage);
-        Health GetHealth();
     }
 }

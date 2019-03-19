@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface ITakeDamage
+namespace Everidea.Core
 {
-    
+    public interface ITakeDamage
+    {
+
+    }
 }

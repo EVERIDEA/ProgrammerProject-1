@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public class Health
+namespace Everidea.Core
 {
-    public float NormalHealth;
-    public float AdditionalHealth;
-    public float CurrentHealth;
+    [System.Serializable]
+    public class Health
+    {
+        public float NormalHealth;
+        public float AdditionalHealth;
+        public float CurrentHealth;
+    }
 }

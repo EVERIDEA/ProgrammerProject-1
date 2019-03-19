@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageManager {
-
-    public void CalculateDamage(Player player, float damage)
+namespace Everidea.Core
+{
+    public class DamageManager
     {
-        player.TakeDamage(damage);
+
+        public void CalculateDamage(Player player, float damage)
+        {
+            player.TakeDamage(damage);
+        }
     }
 }
