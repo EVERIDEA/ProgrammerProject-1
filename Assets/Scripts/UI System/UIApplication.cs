@@ -2,10 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Everidea.Core
+public class UIApplication : BaseApplication<UIModel, UIView, UIController>
 {
-    public class PlayerA : Player
-    {
-
-    }
 }

@@ -6,6 +6,7 @@ namespace Everidea.Core
 {
     public interface IHealth
     {
+        void InitHealth();
         void SetHealth(float damage);
         Health GetHealth();
     }

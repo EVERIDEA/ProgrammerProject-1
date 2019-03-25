@@ -8,4 +8,15 @@ namespace Everidea.Core
     {
         PLAYER, ENEMY
     }
+    public enum AttributeType
+    {
+        STR, AGI, INT
+    }
+    public enum SecondaryAttributeType
+    {
+        NormalAttack,
+        AttackSpeed,
+        CriticalAttack, 
+        MovementSpeed
+    }
 }

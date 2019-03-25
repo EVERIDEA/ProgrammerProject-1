@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Everidea.Core
+public interface IPooledObject
 {
-    public class PlayerA : Player
-    {
-
-    }
+    void OnObjectSpawn();
+    void OnEndObjectSpawn();
 }

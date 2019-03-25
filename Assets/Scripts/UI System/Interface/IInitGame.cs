@@ -2,10 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Everidea.Core
-{
-    public class PlayerA : Player
-    {
-
-    }
+public interface IInitGame {
+    void InitGame();
 }

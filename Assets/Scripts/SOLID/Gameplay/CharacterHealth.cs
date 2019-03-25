@@ -4,11 +4,10 @@ using UnityEngine;
 
 namespace Everidea.Core
 {
-    public class PlayerHealth : MonoBehaviour, IHealth
+    public class CharacterHealth : MonoBehaviour, IHealth
     {
         public Health Health;
-
-
+        
         //Adding calculation health from status etc from core database
         public void InitHealth()
         {

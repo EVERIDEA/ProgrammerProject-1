@@ -8,3 +8,8 @@ ProjectProgrammer-1.Editor.csproj
 ProjectProgrammer-1.sln
 Assets/Resources/
 Assets/Resources.meta
+obj/
+Assembly-CSharp.csproj
+Assembly-CSharp-Editor.csproj
+Logs/Packages-Update.log
+Packages/manifest.json
