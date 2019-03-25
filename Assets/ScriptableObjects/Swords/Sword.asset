@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fd9812d90e7a9d4d8450a3600474172, type: 3}
+  m_Name: Sword
+  m_EditorClassIdentifier: 
+  Name: Sword-01
+  Description: This sword is made from mbah jenggot!
+  SwordSprite: {fileID: 21300014, guid: 20d25e84d2731e946a37e7245680b09b, type: 3}
+  Damage: 15
+  Armour: 0
+  CriticalChance: 0
+  CriticalDamage: 0
+  UltimateMeter: 0
+  LifeSteal: 0

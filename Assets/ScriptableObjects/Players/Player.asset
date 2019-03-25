@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44218562b6758ec4d8b49556d4a46037, type: 3}
+  m_Name: Player
+  m_EditorClassIdentifier: 
+  Name: Musk
+  BasicDamage: 0
+  BasicHealt: 100
+  BasicASPD: 0.3
+  BasicBlockChance: 5
+  BasicCritical: 3
+  BasicDamageCritical: 1.5
+  BasicLifeSteal: 0
+  Movement: 5
+  JumpPower: 5
+  DushMovement: 3

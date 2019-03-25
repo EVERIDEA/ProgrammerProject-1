@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec09e0287ecba3c48b0846b214f9ae42, type: 3}
+  m_Name: InitialPlayer
+  m_EditorClassIdentifier: 
+  Health: 100
+  Damage: 5
+  CriticalDamage: 5
+  Armour: 5
+  AttackSpeed: 5
+  UltimateMeter: 2
+  LifeSteal: 1
+  BlockChance: 5
+  CriticalChance: 2
