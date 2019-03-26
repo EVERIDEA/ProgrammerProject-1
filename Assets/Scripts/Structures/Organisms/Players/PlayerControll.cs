@@ -21,8 +21,11 @@ public class PlayerControll : MonoBehaviour {
     [SerializeField]
     private bool isAutoAttack = true;
 
+    private PlayerCurrency playerCurrency;
+
     private void Start()
     {
+        playerCurrency = new SavePoints().LoadPlayerCurrency();
         AttackSpeed = GetComponent<Player>().AttackSpeed;
     }
 
@@ -31,6 +34,8 @@ public class PlayerControll : MonoBehaviour {
     {
         AutoAttack();
     }
+    
+
 
     public void AutoAttack()
     {

@@ -11,8 +11,15 @@ public class PlayerSupply : MonoBehaviour {
 
     private void Awake()
     {
-        GetComponent<Player>().InitiatePlayerStats(GetDatabase().GetInitialPlayer(playerStatsIndex));
-        GetComponent<Player>().EquipWeapon(GetDatabase().GetInitialSword(playerSwordIndex));
+        SavePoints savePoints = new SavePoints();
+        PlayerCurrentStats player = savePoints.LoadPlayerStats();
+        while (player == null)
+        {
+            player = savePoints.LoadPlayerStats();
+            if (player != null) break;
+        }
+        GetComponent<Player>().InitiatePlayerStats(GetDatabase().GetInitialPlayer(player.PlayerStatsIndex));
+        GetComponent<Player>().EquipWeapon(GetDatabase().GetInitialSword(player.PlayerSwordIndex));
     }
 
     private GameDatabase GetDatabase()
