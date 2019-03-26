@@ -8,9 +8,11 @@ public class SavePoints {
 
     const string folderName = "BinaryDataSaved";
     const string fileExtension = ".eitech";
-    const string fileNamePlayerStats = "player01"; 
+    const string fileNamePlayerStats = "player_stats01"; 
+    const string fileNamePlayerCurrency = "player_currency01"; 
 
     private string dataPlayerPath;
+    private string dataPlayerCurrencyPath;
 
     public SavePoints() {
         string folderPath = Path.Combine(Application.persistentDataPath, folderName);
@@ -19,7 +21,8 @@ public class SavePoints {
             Directory.CreateDirectory(folderPath);
 
         dataPlayerPath = Path.Combine(folderPath, fileNamePlayerStats + fileExtension);
-        Debug.Log(dataPlayerPath);
+        dataPlayerCurrencyPath = Path.Combine(folderPath, fileNamePlayerCurrency + fileExtension);
+        //Debug.Log(dataPlayerPath);
     }
 
     public void SavePlayerStats(PlayerCurrentStats playerStats)
@@ -32,13 +35,51 @@ public class SavePoints {
         }
     }
 
+    public void SavePlayerCurrency(PlayerCurrency playerCurrency)
+    {
+        BinaryFormatter binaryFormatter = new BinaryFormatter();
+
+        using (FileStream fileStream = File.Open(dataPlayerCurrencyPath, FileMode.OpenOrCreate))
+        {
+            binaryFormatter.Serialize(fileStream, playerCurrency);
+        }
+    }
+
     public PlayerCurrentStats LoadPlayerStats()
     {
         BinaryFormatter binaryFormatter = new BinaryFormatter();
 
-        using (FileStream fileStream = File.Open(dataPlayerPath, FileMode.Open))
+        try
         {
-            return (PlayerCurrentStats) binaryFormatter.Deserialize(fileStream);
+            using (FileStream fileStream = File.Open(dataPlayerPath, FileMode.Open))
+            {
+                return (PlayerCurrentStats)binaryFormatter.Deserialize(fileStream);
+            }
+        }
+        catch (FileNotFoundException e)
+        {
+            Debug.Log( "ERROR : " + e);
+            SavePlayerStats(new PlayerCurrentStats(0,0,new GemsCurrentUse(0,0,0,0)));
+            return null;
+        }
+    }
+
+    public PlayerCurrency LoadPlayerCurrency()
+    {
+        BinaryFormatter binaryFormatter = new BinaryFormatter();
+
+        try
+        {
+            using (FileStream fileStream = File.Open(dataPlayerCurrencyPath, FileMode.Open))
+            {
+                return (PlayerCurrency) binaryFormatter.Deserialize(fileStream);
+            }
+        }
+        catch (FileNotFoundException e)
+        {
+            Debug.Log("ERROR : " + e);
+            SavePlayerCurrency(new PlayerCurrency(0,0));
+            return null;
         }
     }
 }
@@ -55,6 +96,19 @@ public class PlayerCurrentStats
         this.PlayerStatsIndex = playerStatsIndexa;
         this.PlayerSwordIndex = playerSwordIndex;
         this.GemsUsed = gemsUsed;
+    }
+}
+
+[System.Serializable]
+public class PlayerCurrency
+{
+    public int Exp;
+    public float Gold;
+
+    public PlayerCurrency(int exp, float gold)
+    {
+        this.Exp = exp;
+        this.Gold = gold;
     }
 }
 

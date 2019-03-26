@@ -13,3 +13,9 @@ Assembly-CSharp.csproj
 Assembly-CSharp-Editor.csproj
 Logs/Packages-Update.log
 Packages/manifest.json
+Assets/Plugins/
+Assets/Plugins.meta
+Assembly-CSharp-firstpass.csproj
+Assembly-CSharp-Editor-firstpass.csproj
+Assets/Assets.rar
+Assets/Assets.rar.meta

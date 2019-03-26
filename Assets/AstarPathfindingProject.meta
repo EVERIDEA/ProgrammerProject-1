@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/AstarPathfindingProject.meta
 guid: f1f4be044411a9f40825c45245de94a5
+=======
+guid: fd818653b4897aa4f83c7072fda25a12
+>>>>>>> origin/master:Assets/ScriptableObjects/Enemies.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
