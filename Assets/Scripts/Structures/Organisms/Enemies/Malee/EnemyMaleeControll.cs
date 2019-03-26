@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyMaleeControll : MonoBehaviour {
+public class EnemyMaleeControll : MonoBehaviour
+{
     
 }
