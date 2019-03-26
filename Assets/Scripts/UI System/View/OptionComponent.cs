@@ -1,19 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using Unitycoding.UIWidgets;
+using Unitycoding.UIWidgets;
 
-public class OptionComponent //: UIWidget
+public class OptionComponent : UIWidget
 {
-    //public GameObject OptionUI;
+    public GameObject OptionUI;
 
-    //public void ShowOption()
-    //{
-    //    OptionUI.SetActive(true);
-    //    Show();
-    //}
-    //public void CloseOption()
-    //{
-    //    Close();
-    //}
+    public void ShowOption()
+    {
+        OptionUI.SetActive(true);
+        Show();
+    }
+    public void CloseOption()
+    {
+        Close();
+    }
 }
