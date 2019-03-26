@@ -8,8 +8,8 @@ public class SavePoints {
 
     const string folderName = "BinaryDataSaved";
     const string fileExtension = ".eitech";
-    const string fileNamePlayerStats = "player_stats"; 
-    const string fileNamePlayerCurrency = "player_currency"; 
+    const string fileNamePlayerStats = "player_stats01"; 
+    const string fileNamePlayerCurrency = "player_currency01"; 
 
     private string dataPlayerPath;
     private string dataPlayerCurrencyPath;
@@ -39,7 +39,7 @@ public class SavePoints {
     {
         BinaryFormatter binaryFormatter = new BinaryFormatter();
 
-        using (FileStream fileStream = File.Open(dataPlayerPath, FileMode.OpenOrCreate))
+        using (FileStream fileStream = File.Open(dataPlayerCurrencyPath, FileMode.OpenOrCreate))
         {
             binaryFormatter.Serialize(fileStream, playerCurrency);
         }
