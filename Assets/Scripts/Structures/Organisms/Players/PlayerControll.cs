@@ -11,18 +11,40 @@ public class PlayerControll : MonoBehaviour {
     private float trackEnemyLenght = 1;
 
     [SerializeField]
+    private Animator playerAnimator;
+    [SerializeField]
     private int Movement = 5;
     [SerializeField]
     private int JumpPower = 15;
     [SerializeField]
     private int AttackSpeed = 1;
+    [SerializeField]
+    private float MaxLeftMap;
+    [SerializeField]
+    private float MaxRightMap;
 
     private float autoAttackCounter = 0;
     [SerializeField]
     private bool isAutoAttack = true;
-
+    
+    #region private parameter
+    //private PlayerAttackTrigger attackTrigger;
+    //private Vector2 startPos;
+    //private Vector2 direction;
+    private bool isGrounded = true;
+    //private bool isTouchMove = false;
+    //private float countToJump = 0;
+    //[SerializeField]
+    //private float timeToAttack = 0;
     private PlayerCurrency playerCurrency;
-
+    private Rigidbody2D Rigid2d;
+    private int playerDirection = 1;
+    private PlayerAnimation playerAnim;
+    private bool isOnFlashForward = false;
+    float attackCounter = 0;
+    int attackIndex = 0;
+    bool isAttack = false;
+    #endregion
 
     private void Awake()
     {
@@ -37,6 +59,8 @@ public class PlayerControll : MonoBehaviour {
         Debug.Log("PlayerCurrency => " + "Exp : " + playerCurrency.Exp + ", Gold : " + playerCurrency.Gold);
 
         AttackSpeed = GetComponent<Player>().AttackSpeed;
+        Rigid2d = GetComponent<Rigidbody2D>();
+        playerAnim = GetComponent<PlayerAnimation>();
     }
 
     private void Start()
@@ -47,7 +71,85 @@ public class PlayerControll : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+
         //AutoAttack();
+        // for android only
+        if (Input.touchCount >= 1)
+        {
+            for (int i = 0; i < Input.touchCount; i++)
+            {
+                Vector3 touchPos = Camera.main.ScreenToWorldPoint(Input.touches[i].position);
+                if (touchPos.x > 0)
+                {
+                    Touch touch = Input.GetTouch(i);
+                    //RightController(touch);
+                }
+                else
+                {
+                    if (touchPos.x < -7f)
+                    {
+                        Move();
+                    }
+                    else
+                    {
+                        Move();
+                    }
+                }
+            }
+        } 
+        else
+        {
+            if (Input.GetKey(KeyCode.A))
+            {
+                playerDirection = -1;
+                Move();
+            }
+            else if (Input.GetKey(KeyCode.D))
+            {
+                playerDirection = 1;
+                Move();
+            }
+            else if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.A))
+            {
+                playerAnim.PlayRun(false);
+            }
+            if (Input.GetKey(KeyCode.Space))
+            {
+                if (isGrounded) Jump(JumpPower);
+            }
+            if (Input.GetKey(KeyCode.Q))
+            {
+                if (!isGrounded) Stomp();
+            }
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                FlashMove(playerDirection);
+            }
+            if (Input.GetMouseButtonDown(0))
+            {
+                isAttack = true;
+                attackCounter = 0;
+                if (attackIndex < 3)
+                {
+                    attackIndex += 1;
+                }
+                else if(attackIndex == 3)
+                {
+                    attackIndex = 1;
+                }
+                Attack(attackIndex);
+            }
+            if (Input.GetKeyDown(KeyCode.E)) TripleCombo();
+            if (isAttack)
+            {
+                attackCounter += Time.deltaTime;
+                if (attackCounter >= 1.5f)
+                {
+                    isAttack = false;
+                    attackIndex = 0;
+                }
+            }
+        }
     }
 
     #region AUTO ATTACK
@@ -107,5 +209,105 @@ public class PlayerControll : MonoBehaviour {
     //    }
     //}
     #endregion
+    
+    public void Move()
+    {
+        playerAnim.PlayRun(true);
+        this.transform.position = SetMinMaxPlayerPosition(new Vector3(this.transform.position.x + (playerDirection * Movement * Time.deltaTime), this.transform.position.y,-1.7f));
+        this.transform.localScale = new Vector2(playerDirection, this.transform.localScale.y);
+    }
+
+    Vector3 SetMinMaxPlayerPosition(Vector3 mousePos)
+    {
+        Vector3 playerPosition = mousePos;
+        if (playerPosition.x >= MaxRightMap)
+            playerPosition = new Vector3(MaxRightMap, playerPosition.y, playerPosition.z);
+        if (playerPosition.x <= MaxLeftMap)
+            playerPosition = new Vector3(MaxLeftMap, playerPosition.y, playerPosition.z);
+
+        return playerPosition;
+    }
+
+    public void Attack(int index)
+    {
+        playerAnim.PlayAttack(index);
+    }
+
+    public void TripleCombo()
+    {
+        playerAnim.PlayTripleCombo();
+    }
+
+    public void Jump(float _jumpPower)
+    {
+        playerAnim.PlayRun(false);
+        playerAnim.PlayJump(true);
+        Rigid2d.velocity = Vector2.up * _jumpPower;
+    }
+    
+    public void FlashMove(int direction)
+    {
+        playerAnim.PlayFlashForward();
+        if (direction == 1) Rigid2d.velocity = Vector2.right * 15;
+        else if (direction == -1) Rigid2d.velocity = Vector2.left * 15;
+    }
+
+    public void Stomp()
+    {
+        playerAnim.PlayStomp();
+        Rigid2d.velocity = Vector2.down * 30;
+    }
+
+    //void RightController(Touch touch)
+    //{
+    //    switch (touch.phase)
+    //    {
+    //        case TouchPhase.Stationary:
+    //            countToJump += Time.deltaTime;
+    //            if (countToJump > .08f && countToJump < 1)
+    //            {
+    //                if (!isTouchMove) if (isGrounded) Jump(JumpPower);
+    //            }
+    //            break;
+    //        case TouchPhase.Began:
+    //            startPos = touch.position;
+    //            break;
+    //        case TouchPhase.Moved:
+    //            isTouchMove = true;
+    //            direction = touch.position - startPos;
+    //            if (direction.x > 0)
+    //            {
+    //                Debug.Log("FlashForward to Left");
+    //            }
+    //            else if (direction.x < 0)
+    //            {
+    //                Debug.Log("FlashForward to Left");
+    //            }
+    //            break;
+    //        case TouchPhase.Ended:
+    //            direction = Vector3.zero;
+    //            isTouchMove = false;
+    //            countToJump = 0;
+    //            break;
+    //    }
+    //}
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("ground"))
+        {
+            isGrounded = true;
+            playerAnim.PlayRun(false);
+            playerAnim.PlayJump(false);
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("ground"))
+        {
+            isGrounded = false;
+        }
+    }
 
 }
