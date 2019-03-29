@@ -288,6 +288,7 @@
       <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/15.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.Advertisements">
+<<<<<<< HEAD
       <HintPath>D:/VERSIONCONTROLS/GITHUB/Tribalz/Library/PackageCache/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Editor">
@@ -301,6 +302,21 @@
     </Reference>
     <Reference Include="UnityEditor.Purchasing">
       <HintPath>D:/VERSIONCONTROLS/GITHUB/Tribalz/Library/PackageCache/com.unity.purchasing@2.0.3/Editor/UnityEditor.Purchasing.dll</HintPath>
+=======
+      <HintPath>D:/VERSIONCONTROLS/GITHUB/PRO_1/Library/PackageCache/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Analytics.Editor">
+      <HintPath>D:/VERSIONCONTROLS/GITHUB/PRO_1/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Analytics.StandardEvents">
+      <HintPath>D:/VERSIONCONTROLS/GITHUB/PRO_1/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Analytics.Tracker">
+      <HintPath>D:/VERSIONCONTROLS/GITHUB/PRO_1/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.Purchasing">
+      <HintPath>D:/VERSIONCONTROLS/GITHUB/PRO_1/Library/PackageCache/com.unity.purchasing@2.0.3/Editor/UnityEditor.Purchasing.dll</HintPath>
+>>>>>>> origin/Dika-Animation
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2018.3.8f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\mscorlib.dll</HintPath>
@@ -712,6 +728,7 @@
     <Compile Include="Packages\com.unity.package-manager-ui\Editor\Sources\UI\PackageStatusBar.cs" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <None Include="Assets\Plugins\Anima2D\Examples\Shaders\Unlit-Alpha-Cull-off.shader" />
     <None Include="Assets\Plugins\Anima2D\Examples\Shaders\VertexLitOneDirectional.shader" />
     <None Include="Assets\Plugins\Anima2D\Examples\Shaders\VisibleInsideMask.shader" />
@@ -720,6 +737,15 @@
     <None Include="Assets\Plugins\Anima2D\Readme.txt" />
     <None Include="Assets\Plugins\Anima2D\Version.txt" />
     <None Include="Assets\Resources\UI\Unitycoding\UI Widgets\Changelog.txt" />
+=======
+    <None Include="Assets\Anima2D\Examples\Shaders\Unlit-Alpha-Cull-off.shader" />
+    <None Include="Assets\Anima2D\Examples\Shaders\VertexLitOneDirectional.shader" />
+    <None Include="Assets\Anima2D\Examples\Shaders\VisibleInsideMask.shader" />
+    <None Include="Assets\Anima2D\Examples\Shaders\VisibleOutsideMask.shader" />
+    <None Include="Assets\Anima2D\Licenses.txt" />
+    <None Include="Assets\Anima2D\Readme.txt" />
+    <None Include="Assets\Anima2D\Version.txt" />
+>>>>>>> origin/Dika-Animation
     <None Include="Packages\com.unity.analytics\DataPrivacy\Unity.Analytics.DataPrivacy.asmdef" />
     <None Include="Packages\com.unity.analytics\Tests\Editor\Unity.Analytics.StandardEvents\Unity.Analytics.StandardEvents.EditorTests.asmdef" />
     <None Include="Packages\com.unity.analytics\Tests\Runtime\DataPrivacy\Unity.Analytics.DataPrivacy.Tests.asmdef" />

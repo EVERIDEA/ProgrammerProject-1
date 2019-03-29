@@ -8,15 +8,19 @@ public class SavePoints {
 
     const string folderName = "BinaryDataSaved";
     const string fileExtension = ".eitech";
-    const string fileNamePlayerStats = "player_stats01"; 
-    const string fileNamePlayerCurrency = "player_currency01"; 
+    const string fileNamePlayerStats = "player_stats"; 
+    const string fileNamePlayerCurrency = "player_currency";
 
+    private string folderPath;
     private string dataPlayerPath;
     private string dataPlayerCurrencyPath;
 
     public SavePoints() {
-        string folderPath = Path.Combine(Application.persistentDataPath, folderName);
-
+#if UNITY_EDITOR
+        folderPath = Path.Combine(Application.persistentDataPath, folderName);
+#elif UNITY_ANDROID
+        folderPath = Path.Combine(Application.dataPath, folderName);
+#endif
         if (!Directory.Exists(folderPath))
             Directory.CreateDirectory(folderPath);
 
@@ -58,7 +62,7 @@ public class SavePoints {
         }
         catch (FileNotFoundException e)
         {
-            Debug.Log( "ERROR : " + e);
+            //Suppost to add some loading, when load data
             SavePlayerStats(new PlayerCurrentStats(0,0,new GemsCurrentUse(0,0,0,0)));
             return null;
         }
