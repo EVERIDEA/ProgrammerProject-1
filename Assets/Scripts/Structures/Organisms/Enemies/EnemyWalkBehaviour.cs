@@ -6,8 +6,11 @@ using Pathfinding;
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Seeker))]
 
-public class EnemyMovement : MonoBehaviour
+public class EnemyWalkBehaviour : MonoBehaviour
 {
+    // What to chase?
+    private Transform target;
+
     // How many times each second we will update our path
     public float updateRate = 2f;
 
@@ -15,7 +18,6 @@ public class EnemyMovement : MonoBehaviour
     private Seeker seeker;
     private Rigidbody2D rb;
     private GameObject player;
-    private Transform target;
 
     //The calculated path
     public Path path;
@@ -38,10 +40,10 @@ public class EnemyMovement : MonoBehaviour
     {
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
-
         player = GameObject.FindGameObjectWithTag("Player");
         target = player.GetComponent<Transform>();
     }
+
 
     void Start()
     {
@@ -92,8 +94,10 @@ public class EnemyMovement : MonoBehaviour
 
         //TODO: Always look at player?
 
+
         if (path == null)
             return;
+
 
         if (currentWaypoint >= path.vectorPath.Count)
         {
@@ -104,6 +108,7 @@ public class EnemyMovement : MonoBehaviour
             pathIsEnded = true;
             return;
         }
+
         pathIsEnded = false;
 
         //Direction to the next waypoint
@@ -118,6 +123,7 @@ public class EnemyMovement : MonoBehaviour
             isFacingLeft = true;
         }
 
+ 
         //Move the AI
         rb.AddForce(dir, fMode);
 
