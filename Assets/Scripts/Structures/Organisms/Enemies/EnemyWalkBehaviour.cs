@@ -36,12 +36,15 @@ public class EnemyWalkBehaviour : MonoBehaviour
     // The waypoint we are currently moving towards
     private int currentWaypoint = 0;
 
+    private EnemyAnimation enemyAnimation;
+
     void Awake()
     {
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("Player");
         target = player.GetComponent<Transform>();
+        enemyAnimation = GetComponent<EnemyAnimation>();
     }
 
 
@@ -81,6 +84,7 @@ public class EnemyWalkBehaviour : MonoBehaviour
         {
             path = p;
             currentWaypoint = 0;
+            enemyAnimation.PlayWalk(false);
         }
     }
 
@@ -105,6 +109,7 @@ public class EnemyWalkBehaviour : MonoBehaviour
                 return;
 
             Debug.Log("End of path reached.");
+            enemyAnimation.PlayIdle();
             pathIsEnded = true;
             return;
         }
@@ -133,17 +138,24 @@ public class EnemyWalkBehaviour : MonoBehaviour
             currentWaypoint++;
             return;
         }
+        else if (dist == nextWaypointDistance)
+        {
+
+            enemyAnimation.PlayWalk(false);
+        }
 
         if (isFacingLeft)
         {
             Debug.Log("Facing Left");
             transform.localScale = new Vector3(2f, 2f, 0);
+            enemyAnimation.PlayWalk(true);
         }
 
         if (!isFacingLeft)
         {
             Debug.Log("Facing Right");
             transform.localScale = new Vector3(-2f, 2f, 0);
+            enemyAnimation.PlayWalk(true);
         }
     }
 }
