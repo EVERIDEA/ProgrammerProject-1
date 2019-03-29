@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class PlayerControll : MonoBehaviour {
 
+
+    public int playerDirection = 1;
+
     [SerializeField]
     [Range(1,5)]
     private float trackEnemyLenght = 1;
@@ -26,7 +29,7 @@ public class PlayerControll : MonoBehaviour {
     private float autoAttackCounter = 0;
     [SerializeField]
     private bool isAutoAttack = true;
-    
+
     #region private parameter
     //private PlayerAttackTrigger attackTrigger;
     //private Vector2 startPos;
@@ -38,12 +41,16 @@ public class PlayerControll : MonoBehaviour {
     //private float timeToAttack = 0;
     private PlayerCurrency playerCurrency;
     private Rigidbody2D Rigid2d;
-    private int playerDirection = 1;
     private PlayerAnimation playerAnim;
     private bool isOnFlashForward = false;
+    float attackStackCounter = 0;
     float attackCounter = 0;
     int attackIndex = 0;
+    bool isStackAttack = false;
     bool isAttack = false;
+    bool isBussy = false;
+    float bussyCounter = 0;
+    float bussyTime = 1f;
     #endregion
 
     private void Awake()
@@ -62,16 +69,9 @@ public class PlayerControll : MonoBehaviour {
         Rigid2d = GetComponent<Rigidbody2D>();
         playerAnim = GetComponent<PlayerAnimation>();
     }
-
-    private void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    
     void Update()
     {
-
         //AutoAttack();
         // for android only
         if (Input.touchCount >= 1)
@@ -99,54 +99,75 @@ public class PlayerControll : MonoBehaviour {
         } 
         else
         {
-            if (Input.GetKey(KeyCode.A))
+            if (!isBussy)
             {
-                playerDirection = -1;
-                Move();
-            }
-            else if (Input.GetKey(KeyCode.D))
-            {
-                playerDirection = 1;
-                Move();
-            }
-            else if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.A))
-            {
-                playerAnim.PlayRun(false);
-            }
-            if (Input.GetKey(KeyCode.Space))
-            {
-                if (isGrounded) Jump(JumpPower);
-            }
-            if (Input.GetKey(KeyCode.Q))
-            {
-                if (!isGrounded) Stomp();
-            }
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                FlashMove(playerDirection);
-            }
-            if (Input.GetMouseButtonDown(0))
-            {
-                isAttack = true;
-                attackCounter = 0;
-                if (attackIndex < 3)
+                if (Input.GetKey(KeyCode.A))
                 {
-                    attackIndex += 1;
+                    playerDirection = -1;
+                    Move();
                 }
-                else if(attackIndex == 3)
+                else if (Input.GetKey(KeyCode.D))
                 {
-                    attackIndex = 1;
+                    playerDirection = 1;
+                    Move();
                 }
-                Attack(attackIndex);
-            }
-            if (Input.GetKeyDown(KeyCode.E)) TripleCombo();
-            if (isAttack)
-            {
-                attackCounter += Time.deltaTime;
-                if (attackCounter >= 1.5f)
+                else if (Input.GetKeyUp(KeyCode.D) || Input.GetKeyUp(KeyCode.A))
                 {
-                    isAttack = false;
-                    attackIndex = 0;
+                    playerAnim.PlayRun(false);
+                }
+
+                if (Input.GetKey(KeyCode.Space))
+                {
+                    if (isGrounded) Jump(JumpPower);
+                }
+                if (Input.GetKey(KeyCode.Q))
+                {
+                    if (!isGrounded)
+                    {
+                        Stomp();
+                    }
+                }
+                if (Input.GetKeyDown(KeyCode.F))
+                {
+                    FlashMove(playerDirection);
+                    
+                }
+                if (Input.GetMouseButtonDown(0))
+                {
+                    isStackAttack = true;
+                    attackStackCounter = 0;
+                    if (attackIndex < 3)
+                    {
+                        attackIndex += 1;
+                    }
+                    else if (attackIndex == 3)
+                    {
+                        attackIndex = 1;
+                    }
+                    Attack(attackIndex);
+                }
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    TripleCombo();
+                }
+                if (isStackAttack)
+                {
+                    attackStackCounter += Time.deltaTime;
+                    attackCounter += Time.deltaTime;
+                    if (attackStackCounter >= 1.5f)
+                    {
+                        isStackAttack = false;
+                        attackIndex = 0;
+                    }
+                }
+            }
+            else
+            {
+                bussyCounter += Time.deltaTime;
+                if (bussyCounter >= bussyTime)
+                {
+                    isBussy = false;
+                    bussyCounter = 0;
                 }
             }
         }
@@ -209,13 +230,6 @@ public class PlayerControll : MonoBehaviour {
     //    }
     //}
     #endregion
-    
-    public void Move()
-    {
-        playerAnim.PlayRun(true);
-        this.transform.position = SetMinMaxPlayerPosition(new Vector3(this.transform.position.x + (playerDirection * Movement * Time.deltaTime), this.transform.position.y,-1.7f));
-        this.transform.localScale = new Vector2(playerDirection, this.transform.localScale.y);
-    }
 
     Vector3 SetMinMaxPlayerPosition(Vector3 mousePos)
     {
@@ -228,6 +242,13 @@ public class PlayerControll : MonoBehaviour {
         return playerPosition;
     }
 
+    public void Move()
+    {
+        playerAnim.PlayRun(true);
+        this.transform.position = SetMinMaxPlayerPosition(new Vector3(this.transform.position.x + (playerDirection * Movement * Time.deltaTime), this.transform.position.y,-1.7f));
+        this.transform.localScale = new Vector2(playerDirection, this.transform.localScale.y);
+    }
+
     public void Attack(int index)
     {
         playerAnim.PlayAttack(index);
@@ -235,6 +256,8 @@ public class PlayerControll : MonoBehaviour {
 
     public void TripleCombo()
     {
+        isBussy = true;
+        bussyTime = 2.2f;
         playerAnim.PlayTripleCombo();
     }
 
@@ -247,6 +270,8 @@ public class PlayerControll : MonoBehaviour {
     
     public void FlashMove(int direction)
     {
+        isBussy = true;
+        bussyTime = 0.5f;
         playerAnim.PlayFlashForward();
         if (direction == 1) Rigid2d.velocity = Vector2.right * 15;
         else if (direction == -1) Rigid2d.velocity = Vector2.left * 15;
@@ -254,6 +279,8 @@ public class PlayerControll : MonoBehaviour {
 
     public void Stomp()
     {
+        isBussy = true;
+        bussyTime = 0.4f;
         playerAnim.PlayStomp();
         Rigid2d.velocity = Vector2.down * 30;
     }

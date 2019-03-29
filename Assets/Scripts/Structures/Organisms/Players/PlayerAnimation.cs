@@ -18,28 +18,33 @@ public class PlayerAnimation : MonoBehaviour
 
     public void PlayJump(bool e)
     {
+        PlayRun(false);
         playerAnimator.SetBool("IsJump", e);
     }
 
     public void PlayFlashForward()
     {
+        PlayRun(false);
         playerAnimator.Play("FlashForward");
     }
 
     public void PlayStomp()
     {
+        PlayRun(false);
         playerAnimator.Play("Stomp");
     }
 
     public void PlayAttack(int attackIndexSession)
     {
-        if(attackIndexSession == 1) playerAnimator.Play("Attack1");
+        PlayRun(false);
+        if (attackIndexSession == 1) playerAnimator.Play("Attack1");
         else if(attackIndexSession == 2) playerAnimator.Play("Attack2");
         else if(attackIndexSession == 3) playerAnimator.Play("Attack3");
     }
 
     public void PlayTripleCombo()
     {
+        PlayRun(false);
         playerAnimator.Play("Triplecombo");
     }
 }
