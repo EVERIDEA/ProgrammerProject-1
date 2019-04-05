@@ -6,6 +6,11 @@ public class Player : Character, IHavePlayerStats
 {
     public InitialSword SwordStats { get; set; }
 
+    private PlayerDataclass playerStats;
+    public PlayerDataclass PlayerStatus {
+        get { return playerStats; }
+    }
+
     public int Health { get; set; }
     public int Damage { get; set; }
     public int CriticalDamage { get; set; }
@@ -13,19 +18,21 @@ public class Player : Character, IHavePlayerStats
     public int AttackSpeed { get; set; }
     public int UltimateMeter { get; set; }
     public int LifeSteal { get; set; }
+
     public int BlockChance { get; set; }
     public int CriticalChance { get; set; }
 
-    public void InitiatePlayerStats(InitialPlayer _playerStats)
+    public void InitiatePlayerStats(PlayerDataclass p_data)
     {
-        Damage = _playerStats.Damage;
-        CriticalDamage = _playerStats.CriticalDamage;
-        Armour = _playerStats.Armour;
-        AttackSpeed = _playerStats.AttackSpeed;
-        UltimateMeter = _playerStats.UltimateMeter;
-        LifeSteal = _playerStats.LifeSteal;
-        BlockChance = _playerStats.BlockChance;
-        CriticalChance = _playerStats.CriticalChance;
+        Health = p_data.Health;
+        Damage = p_data.Damage;
+        CriticalDamage = p_data.CriticalDamage;
+        Armour = p_data.Armour;
+        AttackSpeed = p_data.AttackSpeed;
+        UltimateMeter = p_data.UltimateMeter;
+        LifeSteal = p_data.LifeSteal;
+        BlockChance = p_data.BlockChance;
+        CriticalChance = p_data.CriticalChance;
     }
 
     public void EquipWeapon(InitialSword _playerSword)

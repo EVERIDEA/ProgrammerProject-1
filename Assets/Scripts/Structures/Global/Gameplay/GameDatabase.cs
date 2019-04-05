@@ -4,21 +4,19 @@ using UnityEngine;
 
 public class GameDatabase : MonoBehaviour {
     
-    public InitialPlayer[] PlayerStats;
-    public InitialEnemy[] EnemyStats;
+    public InitialPlayer PlayerStats;
+    public InitialEnemy EnemyStats;
     public InitialSword[] SwordStats;
     public InitialGem[] GemStats;
-
-    public GameDatabase() { }
-
-    public InitialPlayer GetInitialPlayer(int _index)
+    
+    public PlayerDataclass GetInitialPlayer()
     {
-        return PlayerStats[_index];
+        return PlayerStats.PlayerDB;
     }
 
     public InitialEnemy GetInitialEnemy(int _index)
     {
-        return EnemyStats[_index];
+        return EnemyStats;
     }
 
     public InitialSword GetInitialSword(int _index)

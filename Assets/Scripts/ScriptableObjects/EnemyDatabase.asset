@@ -9,16 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec09e0287ecba3c48b0846b214f9ae42, type: 3}
-  m_Name: InitialPlayer
+  m_Script: {fileID: 11500000, guid: 3f6a2333cd5d1114e9b82c86a9008cec, type: 3}
+  m_Name: EnemyDatabase
   m_EditorClassIdentifier: 
-  PlayerDB:
-    Health: 500
-    Damage: 10
-    CriticalDamage: 10
-    Armour: 10
-    AttackSpeed: 3
-    UltimateMeter: 10
-    LifeSteal: 10
-    BlockChance: 10
-    CriticalChance: 10
+  Id: 
+  Name: 
+  Health: 100
+  Damage: 20
+  Armor: 5
+  AttackSpeed: 2

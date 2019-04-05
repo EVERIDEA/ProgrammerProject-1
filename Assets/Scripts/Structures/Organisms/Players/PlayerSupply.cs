@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class PlayerSupply : MonoBehaviour {
 
-    [SerializeField]
-    private int playerStatsIndex = 0;
-    [SerializeField]
-    private int playerSwordIndex = 0;
+    GameDatabase gameDB;
 
     private void Awake()
     {
@@ -18,8 +15,15 @@ public class PlayerSupply : MonoBehaviour {
             player = savePoints.LoadPlayerStats();
             if (player != null) break;
         }
-        GetComponent<Player>().InitiatePlayerStats(GetDatabase().GetInitialPlayer(player.PlayerStatsIndex));
-        GetComponent<Player>().EquipWeapon(GetDatabase().GetInitialSword(player.PlayerSwordIndex));
+
+        gameDB = FindObjectOfType<GameDatabase>();
+        //GetComponent<Player>().InitiatePlayerStats(GetDatabase().GetInitialPlayer());
+        //GetComponent<Player>().EquipWeapon(GetDatabase().GetInitialSword(player.PlayerSwordIndex));
+    }
+
+    public PlayerDataclass GetGetInitialDatabase ()
+    {
+        return gameDB.PlayerStats.PlayerDB;
     }
 
     private GameDatabase GetDatabase()

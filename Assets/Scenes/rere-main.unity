@@ -1426,12 +1426,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1642174886}
+  - component: {fileID: 1642174887}
+  - component: {fileID: 1642174885}
   - component: {fileID: 1642174884}
   - component: {fileID: 1642174882}
   - component: {fileID: 1642174883}
   - component: {fileID: 1642174888}
-  - component: {fileID: 1642174887}
-  - component: {fileID: 1642174885}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -1848,6 +1848,18 @@ PrefabInstance:
       propertyPath: SwordStats.Array.data[8]
       value: 
       objectReference: {fileID: 11400000, guid: ef69b224cae6c224fb682c5cd870766f,
+        type: 2}
+    - target: {fileID: 114699530500692854, guid: 3f7b2133dbd597d4995aafd886b1b4b1,
+        type: 3}
+      propertyPath: PlayerStats
+      value: 
+      objectReference: {fileID: 11400000, guid: 07722850f4dfbe6499efec734d96c87a,
+        type: 2}
+    - target: {fileID: 114699530500692854, guid: 3f7b2133dbd597d4995aafd886b1b4b1,
+        type: 3}
+      propertyPath: EnemyStats
+      value: 
+      objectReference: {fileID: 11400000, guid: 84a6501bdd65e0f40aa8257c4bb5442d,
         type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f7b2133dbd597d4995aafd886b1b4b1, type: 3}
