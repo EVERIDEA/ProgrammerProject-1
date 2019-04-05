@@ -9,7 +9,7 @@ public class UIModel : Model<UIApplication>, IInitGame
     public void InitGame()
     {
         app.view.Dialog.InitDialogData(DialogueData);
-        app.view.Dialog.TypeDialog("S-001");
+        //app.view.Dialog.TypeDialog("S-001");
     }
     
 

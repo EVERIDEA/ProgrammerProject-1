@@ -15,5 +15,7 @@ public class OptionComponent : UIWidget
     public void CloseOption()
     {
         Close();
+
+        OptionUI.SetActive(false);
     }
 }
