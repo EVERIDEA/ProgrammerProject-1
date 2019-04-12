@@ -20,12 +20,7 @@ public class PlayerSupply : MonoBehaviour {
         //GetComponent<Player>().InitiatePlayerStats(GetDatabase().GetInitialPlayer());
         //GetComponent<Player>().EquipWeapon(GetDatabase().GetInitialSword(player.PlayerSwordIndex));
     }
-
-    public PlayerDataclass GetGetInitialDatabase ()
-    {
-        return gameDB.PlayerStats.PlayerDB;
-    }
-
+    
     private GameDatabase GetDatabase()
     {
         GameDatabase[] _dataBases = FindObjectsOfType<GameDatabase>();

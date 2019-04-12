@@ -1,31 +1,40 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Everidea.CoreData;
 
-public class GameDatabase : MonoBehaviour {
-    
-    public InitialPlayer PlayerStats;
-    public InitialEnemy EnemyStats;
-    public InitialSword[] SwordStats;
-    public InitialGem[] GemStats;
-    
-    public PlayerDataclass GetInitialPlayer()
+public class GameDatabase : MonoBehaviour
+{
+    [SerializeField]
+    PlayerDatabase playerDB;
+    [SerializeField]
+    EnemyDatabase enemyDB;
+
+    public CharacterData GetDatabase(Character p_target)
     {
-        return PlayerStats.PlayerDB;
+        CharacterData data = new CharacterData();
+        if (p_target is Player)
+        {
+            for (int i = 0; i < playerDB.Database.Length; i++)
+            {
+                if (playerDB.Database[i].Id == p_target.Id)
+                    data = playerDB.Database[i];
+            }
+        }
+        else
+        {
+            for (int i = 0; i < enemyDB.Database.Length; i++)
+            {
+                if (enemyDB.Database[i].Id == p_target.Id)
+                    data = enemyDB.Database[i];
+            }
+        }
+
+        if (data == null)
+            Debug.Log("Data dengan id " + p_target.Id + " tidak ada");
+
+        return data;
     }
 
-    public InitialEnemy GetInitialEnemy(int _index)
-    {
-        return EnemyStats;
-    }
 
-    public InitialSword GetInitialSword(int _index)
-    {
-        return SwordStats[_index];
-    }
-
-    public InitialGem GetInitialGem(int _index)
-    {
-        return GemStats[_index];
-    }
 }

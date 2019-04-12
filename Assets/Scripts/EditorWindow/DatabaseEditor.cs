@@ -18,13 +18,13 @@ namespace Everidea.EditorDB {
         Rect enemySection;
         Rect weaponSection;
 
-        static Everidea.CoreData.PlayerData playerData;
-        static Everidea.CoreData.EnemyData enemyData;
-        static Everidea.CoreData.WeaponData weaponData;
+        static Everidea.CoreData.PlayerDatabase playerData;
+        static Everidea.CoreData.EnemyDatabase enemyData;
+        static Everidea.CoreData.SwordDatabase weaponData;
 
-        public static Everidea.CoreData.PlayerData PlayerInfo { get { return playerData; } }
-        public static Everidea.CoreData.EnemyData EnemyInfo { get { return enemyData; } }
-        public static Everidea.CoreData.WeaponData WeaponInfo { get { return weaponData; } }
+        public static Everidea.CoreData.PlayerDatabase PlayerInfo { get { return playerData; } }
+        public static Everidea.CoreData.EnemyDatabase EnemyInfo { get { return enemyData; } }
+        public static Everidea.CoreData.SwordDatabase WeaponInfo { get { return weaponData; } }
 
         [MenuItem("Everidea/Database")]
         static void OpenWindow()
@@ -42,9 +42,9 @@ namespace Everidea.EditorDB {
         
         public static void InitData()
         {
-            playerData = (Everidea.CoreData.PlayerData)ScriptableObject.CreateInstance(typeof(Everidea.CoreData.PlayerData));
-            enemyData = (Everidea.CoreData.EnemyData)ScriptableObject.CreateInstance(typeof(Everidea.CoreData.EnemyData));
-            weaponData = (Everidea.CoreData.WeaponData)ScriptableObject.CreateInstance(typeof(Everidea.CoreData.WeaponData));
+            playerData = (Everidea.CoreData.PlayerDatabase)ScriptableObject.CreateInstance(typeof(Everidea.CoreData.PlayerDatabase));
+            enemyData = (Everidea.CoreData.EnemyDatabase)ScriptableObject.CreateInstance(typeof(Everidea.CoreData.EnemyDatabase));
+            weaponData = (Everidea.CoreData.SwordDatabase)ScriptableObject.CreateInstance(typeof(Everidea.CoreData.SwordDatabase));
 
         }
 
@@ -120,15 +120,11 @@ namespace Everidea.EditorDB {
 
             GUILayout.BeginHorizontal();
             GUILayout.Label("Id");
-            playerData.Id = EditorGUILayout.TextField(playerData.Id);
-            GUILayout.EndHorizontal();
-            GUILayout.BeginHorizontal();
-            GUILayout.Label("Name");
-            playerData.Name = EditorGUILayout.TextField(playerData.Name);
-            GUILayout.EndHorizontal();
-            GUILayout.BeginHorizontal();
-            GUILayout.Label("Class Type");
-            playerData.ClassType = (Types.PlayerClassType)EditorGUILayout.EnumPopup(playerData.ClassType);
+            //playerData.Id = EditorGUILayout.TextField(playerData.Id);
+            //GUILayout.EndHorizontal();
+            //GUILayout.BeginHorizontal();
+            //GUILayout.Label("Name");
+            //playerData.Name = EditorGUILayout.TextField(playerData.Name);
             GUILayout.EndHorizontal();
 
             if (GUILayout.Button("Set Database"))
@@ -146,15 +142,15 @@ namespace Everidea.EditorDB {
 
             GUILayout.BeginHorizontal();
             GUILayout.Label("Id");
-            enemyData.Id = EditorGUILayout.TextField(enemyData.Id);
+            //enemyData.Id = EditorGUILayout.TextField(enemyData.Id);
             GUILayout.EndHorizontal();
             GUILayout.BeginHorizontal();
             GUILayout.Label("Name");
-            enemyData.Name = EditorGUILayout.TextField(enemyData.Name);
+            //enemyData.Name = EditorGUILayout.TextField(enemyData.Name);
             GUILayout.EndHorizontal();
             GUILayout.BeginHorizontal();
             GUILayout.Label("Class Type");
-            enemyData.EnemyType = (Types.EnemyType)EditorGUILayout.EnumPopup(enemyData.EnemyType);
+            //enemyData.EnemyType = (Types.EnemyType)EditorGUILayout.EnumPopup(enemyData.EnemyType);
             GUILayout.EndHorizontal();
 
             if (GUILayout.Button("Set Database"))
@@ -171,18 +167,18 @@ namespace Everidea.EditorDB {
 
             GUILayout.Label("Weapon Database");
 
-            GUILayout.BeginHorizontal();
-            GUILayout.Label("Id");
-            weaponData.WeaponId = EditorGUILayout.TextField(weaponData.WeaponId);
-            GUILayout.EndHorizontal();
-            GUILayout.BeginHorizontal();
-            GUILayout.Label("Name");
-            weaponData.WeaponName = EditorGUILayout.TextField(weaponData.WeaponName);
-            GUILayout.EndHorizontal();
-            GUILayout.BeginHorizontal();
-            GUILayout.Label("Class Type");
-            weaponData.Type = (Types.AttackType)EditorGUILayout.EnumPopup(weaponData.Type);
-            GUILayout.EndHorizontal();
+            //GUILayout.BeginHorizontal();
+            //GUILayout.Label("Id");
+            //weaponData.WeaponId = EditorGUILayout.TextField(weaponData.WeaponId);
+            //GUILayout.EndHorizontal();
+            //GUILayout.BeginHorizontal();
+            //GUILayout.Label("Name");
+            //weaponData.WeaponName = EditorGUILayout.TextField(weaponData.WeaponName);
+            //GUILayout.EndHorizontal();
+            //GUILayout.BeginHorizontal();
+            //GUILayout.Label("Class Type");
+            //weaponData.Type = (Types.AttackType)EditorGUILayout.EnumPopup(weaponData.Type);
+            //GUILayout.EndHorizontal();
 
             if (GUILayout.Button("Set Database"))
             {
@@ -231,13 +227,15 @@ namespace Everidea.EditorDB {
         void DrawPlayerSettings()
         {
             GUILayout.BeginHorizontal();
-            GUILayout.Label("Level");
-            DatabaseEditor.PlayerInfo.Level = EditorGUILayout.IntField(DatabaseEditor.PlayerInfo.Level);
-            GUILayout.EndHorizontal();
-            GUILayout.BeginHorizontal();
             GUILayout.Label("Health");
-            DatabaseEditor.PlayerInfo.Health = EditorGUILayout.FloatField(DatabaseEditor.PlayerInfo.Health);
+            //DatabaseEditor.PlayerInfo.Health = EditorGUILayout.FloatField(DatabaseEditor.PlayerInfo.Health);
             GUILayout.EndHorizontal();
+
+            if (GUILayout.Button("Save Database"))
+            {
+                SaveDataPlayer();
+                window.Close();
+            }
         }
         void DrawEnemySettings()
         {
@@ -245,14 +243,25 @@ namespace Everidea.EditorDB {
         }
         void DrawWeaponSettings()
         {
-            GUILayout.BeginHorizontal();
-            GUILayout.Label("Critical Chance");
-            DatabaseEditor.WeaponInfo.CriticalChance = EditorGUILayout.Slider(DatabaseEditor.WeaponInfo.CriticalChance, 0 , 100);
-            GUILayout.EndHorizontal();
-            GUILayout.BeginHorizontal();
-            GUILayout.Label("Lifesteal Chance");
-            DatabaseEditor.WeaponInfo.LifestealChance = EditorGUILayout.Slider(DatabaseEditor.WeaponInfo.LifestealChance, 0 , 100);
-            GUILayout.EndHorizontal();
+            //GUILayout.BeginHorizontal();
+            //GUILayout.Label("Critical Chance");
+            //DatabaseEditor.WeaponInfo.CriticalChance = EditorGUILayout.Slider(DatabaseEditor.WeaponInfo.CriticalChance, 0 , 100);
+            //GUILayout.EndHorizontal();
+            //GUILayout.BeginHorizontal();
+            //GUILayout.Label("Lifesteal Chance");
+            //DatabaseEditor.WeaponInfo.LifestealChance = EditorGUILayout.Slider(DatabaseEditor.WeaponInfo.LifestealChance, 0 , 100);
+            //GUILayout.EndHorizontal();
+        }
+
+        void SaveDataPlayer()
+        {
+            string prefabPath = "";
+            string newPrefabPath = "Assets";
+            string dataPath = "Assets/ScriptabelObjects/SaveData/";
+
+            dataPath += "PlayerDB.asset";
+            AssetDatabase.DeleteAsset(dataPath);
+            AssetDatabase.CreateAsset(DatabaseEditor.PlayerInfo, dataPath);
         }
     }
 }

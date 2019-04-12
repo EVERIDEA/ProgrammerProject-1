@@ -15,7 +15,7 @@ public class InlineFrames : MonoBehaviour
     void Start()
     {
         player = target.gameObject;
-        direction = player.GetComponent<PlayerControll>().playerDirection;
+        //direction = player.GetComponent<PlayerController>().playerDirection;
     }
 
     // Update is called once per frame

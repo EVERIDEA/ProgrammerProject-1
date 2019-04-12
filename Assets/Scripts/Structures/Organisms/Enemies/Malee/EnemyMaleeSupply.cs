@@ -9,7 +9,7 @@ public class EnemyMaleeSupply : MonoBehaviour {
 
     private void Awake()
     {
-        GetComponent<EnemyMalee>().InitiateEnemy(GetDatabase().GetInitialEnemy(enemyStatsIndex));
+        //GetComponent<EnemyMalee>().InitiateEnemy(GetDatabase().GetInitialEnemy(enemyStatsIndex));
     }
 
     private GameDatabase GetDatabase()

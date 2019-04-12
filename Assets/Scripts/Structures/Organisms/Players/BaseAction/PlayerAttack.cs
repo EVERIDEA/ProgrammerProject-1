@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyMalee : Character
+public class PlayerAttack
 {
+    public void Attack()
+    {
+
+    }
 }
