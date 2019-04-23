@@ -15,4 +15,9 @@ public class PlayerAnimation
     {
         animator.Play(name);
     }
+
+    public void Play(string boolName, bool status)
+    {
+        animator.SetBool(boolName, status);
+    }
 }

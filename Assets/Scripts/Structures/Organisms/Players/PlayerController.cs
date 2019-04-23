@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
     {
         playerMove = new PlayerMove(transform);
         playerJump = new PlayerJump(transform);
-        playerAnimation = new PlayerAnimation(gameObject, true);
+        playerAnimation = new PlayerAnimation(transform.GetChild(0).gameObject, true);
         playerFlash = new PlayerFlashMove(gameObject);
         playerStomp = new PlayerStomp(gameObject);
         playerAttack = new PlayerAttack();
@@ -121,10 +121,10 @@ public class PlayerController : MonoBehaviour
     {
         switch (key) {
             case KeyCode.A: case KeyCode.D:
-                playerAnimation.Play("RUN");
+                playerAnimation.Play("IsRun", true);
                 break;
             case KeyCode.Space:
-                playerAnimation.Play("JUMP");
+                playerAnimation.Play("IsJump", true);
                 if (isGrounded)
                     playerJump.Jump(jumpPower);
                 break;
@@ -155,7 +155,7 @@ public class PlayerController : MonoBehaviour
         switch (key)
         {
             case KeyCode.A: case KeyCode.D:
-                playerAnimation.Play("IDLE");
+                playerAnimation.Play("IsRun",false);
                 break;
             case KeyCode.Space:
                 break;
@@ -164,6 +164,6 @@ public class PlayerController : MonoBehaviour
 
     void MouseDownAction()
     {
-        playerAnimation.Play("ATTACK_1");
+        playerAnimation.Play("Attack1");
     }
 }

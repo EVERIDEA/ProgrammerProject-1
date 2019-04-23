@@ -1463,7 +1463,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Id: P-1
-  Name: 
+  Name: SUSI
 --- !u!61 &1642174885
 BoxCollider2D:
   m_ObjectHideFlags: 0
